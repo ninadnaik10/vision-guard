@@ -99,7 +99,7 @@ export default function AddRoleDialog({
     const existingRoleIndex = roles.findIndex((r) => r.role === roleName);
 
     const filteredPermissions = Object.fromEntries(
-      Object.entries(resourcePermissions).filter(([_, permissions]) =>
+      Object.entries(resourcePermissions).filter(([, permissions]) =>
         Object.values(permissions).some((p) => p)
       )
     );
@@ -221,7 +221,7 @@ export default function AddRoleDialog({
                   </div>
                   <div className="text-sm text-gray-600">
                     {Object.entries(resourcePerms)
-                      .filter(([_, value]) => value)
+                      .filter(([, value]) => value)
                       .map(([perm]) => perm)
                       .join(", ") || "No permissions"}
                   </div>

@@ -1,4 +1,4 @@
-import { Users, Shield } from "lucide-react";
+import { Users, Shield, Home } from "lucide-react";
 
 import {
   Sidebar,
@@ -13,6 +13,11 @@ import {
 
 // Menu items.
 const items = [
+  {
+    title: "Home",
+    url: "/",
+    icon: Home,
+  },
   {
     title: "Manage Users",
     url: "/users",
@@ -30,7 +35,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Admin Dashboard</SidebarGroupLabel>
+          <SidebarGroupLabel>Vision Guard Dashboard</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
