@@ -44,13 +44,19 @@ const columns: ColumnDef<User>[] = [
 ];
 
 export default function ManageUsers() {
-  const users = useAtomValue(usersAtom);
+  const [users, setUsers] = useAtom(usersAtom);
   const table = useReactTable<User>({
     data: users || [],
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
   });
   const [editingId, setEditingId] = useState<string | null>(null);
+  const handleDeleteUser = (id: string) => {
+    const filteredUsers = users?.filter((user) => user.id !== id);
+    if (filteredUsers) {
+      setUsers(filteredUsers);
+    }
+  };
   return (
     <div>
       <Dialog>
@@ -114,7 +120,11 @@ export default function ManageUsers() {
                             <Edit />
                           </Button>
                         </DialogTrigger>
-                        <Button variant="ghost" className="rounded-full">
+                        <Button
+                          variant="ghost"
+                          className="rounded-full"
+                          onClick={() => handleDeleteUser(row.original.id)}
+                        >
                           <Trash />
                         </Button>
                       </TableCell>
