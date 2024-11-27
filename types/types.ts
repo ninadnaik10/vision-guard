@@ -12,3 +12,18 @@ export type TPermission = {
   update: boolean;
   delete: boolean;
 };
+
+export type RolePermissions = {
+  role: string;
+  description?: string;
+  permissions: {
+    [key: string]: {
+      create: boolean;
+      view: boolean;
+      update: boolean;
+      delete: boolean;
+    };
+  };
+};
+
+export type PermissionType = "create" | "view" | "update" | "delete";

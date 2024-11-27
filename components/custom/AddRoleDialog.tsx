@@ -11,16 +11,9 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Eye, PlusCircle, Edit2, Trash2 } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import { useAtom } from "jotai";
-import { rolesAtom, RolePermissions } from "@/atoms/RoleAtom";
-import lodash from "lodash";
+import { rolesAtom } from "@/atoms/RoleAtom";
+import { RolePermissions } from "@/types/types";
 import ResourceSelectBox from "./ResourceSelectBox";
 
 const resourceOptions = ["events", "users", "products", "orders"];
@@ -121,8 +114,10 @@ export default function AddRoleDialog({
       const updatedRoles = roles.map((role, index) =>
         index === existingRoleIndex ? newRole : role
       );
+      console.log(updatedRoles);
       setRoles(updatedRoles);
     } else {
+      console.log(newRole);
       setRoles([...roles, newRole]);
     }
   };
@@ -227,7 +222,7 @@ export default function AddRoleDialog({
                   <div className="text-sm text-gray-600">
                     {Object.entries(resourcePerms)
                       .filter(([_, value]) => value)
-                      .map(([perm]) => lodash.capitalize(perm))
+                      .map(([perm]) => perm)
                       .join(", ") || "No permissions"}
                   </div>
                 </div>

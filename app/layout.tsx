@@ -34,7 +34,7 @@ export default function RootLayout({
         <Provider>
           <SidebarProvider>
             <AppSidebar />
-            <main className="flex flex-col p-2 w-full">
+            <main className="flex flex-col p-2 w-full font-[family-name:var(--font-geist-sans)]">
               <SidebarTrigger />
 
               {children}

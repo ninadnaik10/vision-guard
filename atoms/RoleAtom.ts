@@ -1,17 +1,5 @@
 import { atom } from "jotai";
-
-export type RolePermissions = {
-  role: string;
-  description?: string;
-  permissions: {
-    [key: string]: {
-      create: boolean;
-      view: boolean;
-      update: boolean;
-      delete: boolean;
-    };
-  };
-};
+import { RolePermissions } from "@/types/types";
 
 export const rolesAtom = atom<RolePermissions[]>([
   {
