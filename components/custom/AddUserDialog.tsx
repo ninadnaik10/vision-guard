@@ -73,7 +73,7 @@ export default function AddUserDialog({
         <DialogHeader>
           <DialogTitle>Add User</DialogTitle>
           <DialogDescription>
-            Add name, email and role for the user. {name}
+            Add name, email and role for the user.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
