@@ -24,7 +24,7 @@ import { useAtom, useAtomValue } from "jotai";
 import { usersAtom } from "@/atoms/UserAtom";
 import { User } from "@/types/types";
 import { Edit, Trash } from "lucide-react";
-export const columns: ColumnDef<User>[] = [
+const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
     header: "Name",
