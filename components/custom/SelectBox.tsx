@@ -8,15 +8,20 @@ import {
 } from "../ui/select";
 
 export default function SelectBox({
+  values,
+  defaultVal,
   className,
   onChange,
 }: {
+  values: string[];
+  defaultVal: string;
   className?: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }) {
   return (
     <div className={className}>
       <Select
+        defaultValue={defaultVal}
         onValueChange={(value: string) =>
           onChange?.({
             target: { value },
@@ -27,9 +32,16 @@ export default function SelectBox({
           <SelectValue placeholder="Roles" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="Admin">Admin</SelectItem>
+          {values.map((val, idx) => {
+            return (
+              <SelectItem value={val} key={idx}>
+                {val}
+              </SelectItem>
+            );
+          })}
+          {/* <SelectItem value="Admin">Admin</SelectItem>
           <SelectItem value="Editor">Editor</SelectItem>
-          <SelectItem value="Viewer">Viewer</SelectItem>
+          <SelectItem value="Viewer">Viewer</SelectItem> */}
         </SelectContent>
       </Select>
     </div>

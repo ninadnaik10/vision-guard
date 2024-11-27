@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -22,15 +22,8 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import AddUserDialog from "@/components/custom/AddUserDialog";
 import { useAtom, useAtomValue } from "jotai";
 import { usersAtom } from "@/atoms/UserAtom";
-
-type User = {
-  id: string;
-  email: string;
-  name: string;
-  role: string;
-  status: "active" | "inactive";
-};
-
+import { User } from "@/types/types";
+import { Edit, Trash } from "lucide-react";
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
@@ -57,6 +50,7 @@ export default function ManageUsers() {
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
   });
+  const [editingId, setEditingId] = useState<string | null>(null);
   return (
     <div>
       <Dialog>
@@ -67,7 +61,7 @@ export default function ManageUsers() {
               <Button>Add User</Button>
             </DialogTrigger>
           </div>
-          <AddUserDialog />
+          <AddUserDialog editingId={editingId} />
           <div className="rounded-md border">
             <Table>
               <TableHeader>
@@ -104,6 +98,26 @@ export default function ManageUsers() {
                           )}
                         </TableCell>
                       ))}
+                      <TableCell className="p-0">
+                        <DialogTrigger
+                          asChild
+                          onClick={() => setEditingId(row.original.id)}
+                        >
+                          <Button
+                            variant="ghost"
+                            className="rounded-full"
+                            onClick={() => {
+                              console.log("clicked");
+                              setEditingId(row.original.id);
+                            }}
+                          >
+                            <Edit />
+                          </Button>
+                        </DialogTrigger>
+                        <Button variant="ghost" className="rounded-full">
+                          <Trash />
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))
                 ) : (

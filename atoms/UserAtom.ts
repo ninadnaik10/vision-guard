@@ -1,11 +1,12 @@
 import { atom } from "jotai";
+import { User } from "@/types/types";
 
-type User = {
-  id: string;
-  email: string;
-  name: string;
-  role: string;
-  status: "active" | "inactive";
-};
-
-export const usersAtom = atom<User[] | null>([]);
+export const usersAtom = atom<User[] | null>([
+  {
+    id: "1",
+    email: "test@test.com",
+    name: "Test User",
+    role: "Admin",
+    status: "Active",
+  },
+]);
