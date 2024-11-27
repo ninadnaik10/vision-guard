@@ -36,7 +36,7 @@ export default function ManageRoles() {
                 ...role.permissions,
                 [resource]: {
                   ...role.permissions[resource],
-                  [action]: !role.permissions[resource][action],
+                  [action]: !role.permissions?.[resource]?.[action],
                 },
               },
             }

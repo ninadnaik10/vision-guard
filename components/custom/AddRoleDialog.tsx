@@ -34,6 +34,7 @@ export default function AddRoleDialog({
   const [roleName, setRoleName] = useState("");
   const [description, setDescription] = useState("");
   const [selectedResource, setSelectedResource] = useState(resourceOptions[0]);
+  const [roleNameError, setRoleNameError] = useState("");
 
   // Store permissions for each resource
   const [resourcePermissions, setResourcePermissions] = useState<{
@@ -76,6 +77,28 @@ export default function AddRoleDialog({
     }
   }, [editingRole, roles]);
 
+  const validateRoleName = (name: string) => {
+    if (!name.trim()) {
+      setRoleNameError("Role name is required");
+      return false;
+    }
+
+    // Check for duplicate role names (excluding the current role being edited)
+    const isDuplicate = roles.some(
+      (r) =>
+        r.role.toLowerCase() === name.trim().toLowerCase() &&
+        r.role !== editingRole
+    );
+
+    if (isDuplicate) {
+      setRoleNameError("Role name already exists");
+      return false;
+    }
+
+    setRoleNameError("");
+    return true;
+  };
+
   const togglePermission = (
     resource: string,
     permissionType: keyof typeof permissionIcons
@@ -91,8 +114,7 @@ export default function AddRoleDialog({
 
   const handleSubmit = () => {
     // Validate role name
-    if (!roleName.trim()) {
-      alert("Role name cannot be empty");
+    if (!validateRoleName(roleName)) {
       return;
     }
 
@@ -105,7 +127,7 @@ export default function AddRoleDialog({
     );
 
     const newRole: RolePermissions = {
-      role: roleName,
+      role: roleName.trim(),
       description: description || undefined,
       permissions: filteredPermissions,
     };
@@ -114,10 +136,8 @@ export default function AddRoleDialog({
       const updatedRoles = roles.map((role, index) =>
         index === existingRoleIndex ? newRole : role
       );
-      console.log(updatedRoles);
       setRoles(updatedRoles);
     } else {
-      console.log(newRole);
       setRoles([...roles, newRole]);
     }
   };
@@ -135,13 +155,22 @@ export default function AddRoleDialog({
           <Label htmlFor="roleName" className="text-right">
             Role Name
           </Label>
-          <Input
-            id="roleName"
-            placeholder="e.g., Manager"
-            className="col-span-3"
-            value={roleName}
-            onChange={(e) => setRoleName(e.target.value)}
-          />
+          <div className="col-span-3">
+            <Input
+              id="roleName"
+              placeholder="e.g., Manager"
+              className={`${roleNameError ? "border-red-500" : ""}`}
+              value={roleName}
+              onChange={(e) => {
+                setRoleName(e.target.value);
+                setRoleNameError("");
+              }}
+              onBlur={() => validateRoleName(roleName)}
+            />
+            {roleNameError && (
+              <p className="text-red-500 text-sm mt-1">{roleNameError}</p>
+            )}
+          </div>
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="description" className="text-right">
@@ -236,7 +265,11 @@ export default function AddRoleDialog({
           <Button variant="outline">Cancel</Button>
         </DialogClose>
         <DialogClose asChild>
-          <Button type="submit" onClick={handleSubmit}>
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            disabled={!roleName.trim() || !!roleNameError}
+          >
             Save Role
           </Button>
         </DialogClose>
