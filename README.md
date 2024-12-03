@@ -118,3 +118,25 @@ This project is a Role-Based Access Control (RBAC) User Interface designed and d
 - **Role Hierarchy:** Implement a hierarchical role structure for more complex permission management.
 
 This project demonstrates a solid foundation for an RBAC admin dashboard. With its user-friendly interface, robust features, and potential for future enhancements, it effectively addresses the requirements of the VRV Security Frontend Developer Intern assignment.
+
+### Screenshots
+
+#### User dashboard
+
+![Add user dialog](./public/screenshots/userdashboard.png)
+
+#### Add User Dialog box
+
+![Add user dialog](./public/screenshots/adduser.png)
+
+#### Roles Dashboard
+
+![Add user dialog](./public/screenshots/rolesdashboard.png)
+
+#### Add Role Dialog box
+
+![Add user dialog](./public/screenshots/createrole.png)
+
+#### New role added
+
+![Add user dialog](./public/screenshots/newroleadded.png)
