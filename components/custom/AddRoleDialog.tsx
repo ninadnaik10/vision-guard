@@ -36,7 +36,6 @@ export default function AddRoleDialog({
   const [selectedResource, setSelectedResource] = useState(resourceOptions[0]);
   const [roleNameError, setRoleNameError] = useState("");
 
-  // Store permissions for each resource
   const [resourcePermissions, setResourcePermissions] = useState<{
     [resource: string]: {
       create: boolean;
@@ -60,14 +59,12 @@ export default function AddRoleDialog({
   );
 
   useEffect(() => {
-    // If editing an existing role, pre-fill the form
     if (editingRole && roles) {
       const existingRole = roles.find((r) => r.role === editingRole);
       if (existingRole) {
         setRoleName(existingRole.role);
         setDescription(existingRole.description || "");
 
-        // Populate permissions for all resources
         const updatedPermissions = { ...resourcePermissions };
         Object.keys(existingRole.permissions).forEach((resource) => {
           updatedPermissions[resource] = existingRole.permissions[resource];
@@ -83,7 +80,6 @@ export default function AddRoleDialog({
       return false;
     }
 
-    // Check for duplicate role names (excluding the current role being edited)
     const isDuplicate = roles.some(
       (r) =>
         r.role.toLowerCase() === name.trim().toLowerCase() &&
@@ -113,7 +109,6 @@ export default function AddRoleDialog({
   };
 
   const handleSubmit = () => {
-    // Validate role name
     if (!validateRoleName(roleName)) {
       return;
     }

@@ -1,6 +1,6 @@
 ## Vision Guard - RBAC Admin Dashboard
 
-This project is a Role-Based Access Control (RBAC) User Interface designed and developed for the VRV Security Frontend Developer Intern assignment. It provides a robust and user-friendly platform for managing users, roles, and permissions within an organization.
+This project is a Role-Based Access Control (RBAC) User Interface. It provides a robust and user-friendly platform for managing users, roles, and permissions within an organization.
 
 **Live Demo:** [https://vision-guard.vercel.app](https://vision-guard.vercel.app/)
 
